@@ -1,4 +1,3 @@
-package aliexpress
 import org.apache.spark.sql.{Column, DataFrame, Dataset, Row, SparkSession}
 import org.apache.spark.sql.functions._
 
@@ -35,9 +34,9 @@ import org.apache.spark.sql.functions._
 
     def soldValuePerDay(spark: SparkSession, aliexpressDF: DataFrame): DataFrame = {
       val withSoldValue = aliexpressDF
-      .withColumn("soldValue", (col("price") * col("sold")))
+      .withColumn("soldValue", col("price") * col("sold"))
       .withColumn("datediff",datediff(current_date(), col("lunchTime")))
-      .withColumn("valuePerDay",(col("soldValue") / col("datediff")))  //sold per days
+      .withColumn("valuePerDay",col("soldValue") / col("datediff"))  //sold per days
       .withColumn("valuePerDay",round(col("valuePerDay"),2))
 
       val columns = List("title","lunchTime","soldValue","datediff","valuePerDay")
