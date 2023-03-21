@@ -5,15 +5,4 @@
 /dataset/
 /.bsp/
 /.git/
-/soldValuePerDay.csv/
-/soldValuePerDay.csv/
-/totalSolldValueByCategory.csv/
-/soldValuePerDay.csv/
-/bestsellersByQty/
-/countItemsInCategories.csv/
-/daysFromAuctionStart/
-/itemInCategories/
-/soldValuePerDay/
-/soldValuePerDay.csv/
-/totalSoldValuebyCat/
-/totalSolldValueByCategory.csv/
+/out/

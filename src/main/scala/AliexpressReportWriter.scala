@@ -1,9 +1,7 @@
-import org.apache.spark.sql.{Column, DataFrame, Dataset, Row, SaveMode, SparkSession}
-import org.apache.spark.sql.functions._
-import org.apache.spark.sql.types.{DataTypes, StructField, StructType}
+import org.apache.spark.sql.{ DataFrame, SaveMode}
 
 class AliexpressReportWriter{
-  def writeCsvReport(spark: SparkSession,aliexpressDF:DataFrame,fileName:String) {
+  def writeCsvReport(aliexpressDF:DataFrame,fileName:String):Unit =  {
         aliexpressDF.coalesce(1).write.mode(SaveMode.Overwrite).option("header", value = true).csv(fileName)
   }
 

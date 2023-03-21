@@ -1,12 +1,8 @@
-import org.apache.spark.sql.{Column, DataFrame, Dataset, Row, SparkSession}
-import org.apache.spark.sql.functions._
-import org.apache.spark.sql.types.{DataTypes, StructField, StructType}
+import org.apache.spark.sql.DataFrame
 
   class AliexpressCleaner {
-    def cleanAliexpressDataset(spark: SparkSession,aliexpressDF:DataFrame): DataFrame = {
-      val cleanedDF = aliexpressDF.drop("category")  // one value in whole column
-      cleanedDF
-
+    def cleanAliexpressDataset(aliexpressDF:DataFrame): DataFrame = {
+      aliexpressDF.drop("category")  // one value in whole column
     }
 
 }

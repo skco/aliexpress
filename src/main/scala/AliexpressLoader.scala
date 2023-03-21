@@ -1,10 +1,10 @@
-import org.apache.spark.sql.{Column, DataFrame, Dataset, Row, SaveMode, SparkSession}
+import org.apache.spark.sql.{ DataFrame, Dataset, Row,  SparkSession}
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types.{DataTypes, StructField, StructType}
 
-class AliexpressLoader {
+class AliexpressLoader{
     def loadAliexpressDataset(spark: SparkSession,datasetFilePath:String):DataFrame = {
-      //custom scema for datetime parse
+      //custom schema for datetime parse
       val customSchema = StructType(Array(
         StructField("id",             DataTypes.LongType, nullable = true),
         StructField("storeId",        DataTypes.LongType, nullable = true),
@@ -14,7 +14,7 @@ class AliexpressLoader {
         StructField("lunchTime",      DataTypes.TimestampType, nullable = true),
         StructField("category",       DataTypes.StringType, nullable = true),
         StructField("postCategory",   DataTypes.IntegerType, nullable = true),
-        StructField("sold",           DataTypes.StringType, nullable = true), // remove " sold"
+        StructField("sold",           DataTypes.StringType, nullable = true),
         StructField("price",          DataTypes.DoubleType, nullable = true),
         StructField("discount",       DataTypes.DoubleType, nullable = true),
         StructField("shippingCost",   DataTypes.DoubleType, nullable = true),
