@@ -8,10 +8,10 @@ class AliexpressLoader{
    *
    * @param spark spark session
    * @param datasetFilePath raw aliexpress csv dataset
-   * @return formated DataFrame
+   * @return formated DataFrae
    */
 
-    def loadAliexpressDataset(spark: SparkSession,datasetFilePath:String):DataFrame = {
+    def loadAliexpressDataset(spark: SparkSession,datasetFilePath:String):Dataset[Row] = {
       //custom schema for datetime parse
       val customSchema = StructType(Array(
         StructField("id",             DataTypes.LongType, nullable = true),
@@ -39,7 +39,7 @@ class AliexpressLoader{
       //1SAR = 0.27USD
       //12-14h of December 2022
 
-      val aliexpressDF:Dataset[Row] = spark.read
+      spark.read
         .option("header", "true")
         .schema(customSchema)
         .csv(datasetFilePath)
@@ -49,6 +49,5 @@ class AliexpressLoader{
         .withColumn("shippingCost", col("shippingCost") * 0.27) //1 SAR = 0.27 USD
         .withColumn("shippingCost", round(col("shippingCost"), 2)) //round double columns after multiplication
         .withColumn("price", round(col("price"), 2))
-        aliexpressDF
     }
 }
