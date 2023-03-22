@@ -8,7 +8,7 @@ class AliexpressLoader{
    *
    * @param spark spark session
    * @param datasetFilePath raw aliexpress csv dataset
-   * @return formated DataFrae
+   * @return formated DataFrame
    */
 
     def loadAliexpressDataset(spark: SparkSession,datasetFilePath:String):Dataset[Row] = {
