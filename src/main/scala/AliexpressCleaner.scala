@@ -1,5 +1,4 @@
-import org.apache.spark.sql.DataFrame
-
+import org.apache.spark.sql.{DataFrame, Dataset, Row}}
   class AliexpressCleaner {
 
     /**
@@ -7,7 +6,7 @@ import org.apache.spark.sql.DataFrame
      * @param aliexpressDF DataFrame from loader output loader
      * @return cleaned DataFrame
      */
-    def cleanAliexpressDataset(aliexpressDF:DataFrame): DataFrame = {
+    def cleanAliexpressDataset(aliexpressDF:Dataset[Row]): Dataset[Row] = {
       aliexpressDF.drop("category")  // one value in whole column
     }
 

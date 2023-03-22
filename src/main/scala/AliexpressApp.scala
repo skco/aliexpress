@@ -19,12 +19,11 @@ object AliexpressApp{
     val aliexpressDF:Dataset[Row] = cleaner.cleanAliexpressDataset(loader.loadAliexpressDataset(spark,HDFSPath+"aliexpress.csv"))
 
     //analyzer
-
     val itemInCategories     = analyser.countItemsInCategories(aliexpressDF)
     val soldValuePerDay      = analyser.soldValuePerDay(aliexpressDF).sort()
     val totalSoldValueByCat  = analyser.calculateTotalSoldValueByCategory(aliexpressDF)
-    val bestsellersByQty     = aliexpressDF.sort(desc("sold"))
     val daysFromAuctionStart = analyser.daysFromAuctionLaunch(aliexpressDF)
+    val bestsellersByQty     = aliexpressDF.sort(desc("sold"))
 
     reportWriter.writeCsvReport(itemInCategories,    HDFSPath+"itemInCategories")
     reportWriter.writeCsvReport(soldValuePerDay,     HDFSPath+"soldValuePerDay")
