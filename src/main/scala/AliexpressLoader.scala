@@ -3,6 +3,14 @@ import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types.{DataTypes, StructField, StructType}
 
 class AliexpressLoader{
+
+  /**
+   *
+   * @param spark spark session
+   * @param datasetFilePath raw aliexpress csv dataset
+   * @return formated DataFrame
+   */
+
     def loadAliexpressDataset(spark: SparkSession,datasetFilePath:String):DataFrame = {
       //custom schema for datetime parse
       val customSchema = StructType(Array(

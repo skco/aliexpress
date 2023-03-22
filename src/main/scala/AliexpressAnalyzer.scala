@@ -2,6 +2,11 @@ import org.apache.spark.sql.{DataFrame, Dataset, Row}
 import org.apache.spark.sql.functions._
 
   class AliexpressAnalyzer {
+    /**
+     * c
+     * @param aliexpressDF cleaned DataFrame
+     * @return DataFrame with counted item in each category
+     */
     def countItemsInCategories(aliexpressDF:Dataset[Row] ):Dataset[Row]  = {
       val itemInCategories: DataFrame = aliexpressDF
         .groupBy("category_name")
@@ -11,6 +16,11 @@ import org.apache.spark.sql.functions._
       itemInCategories
     }
 
+    /**
+     *
+     * @param aliexpressDF leaned DataFrame
+     * @return ataFrame with total sold value in each category
+     */
     def calculateTotalSoldValueByCategory(aliexpressDF: Dataset[Row] ): Dataset[Row]  = {
       val withSoldValue = aliexpressDF.withColumn("soldValue", (col("price") * col("sold")) / 1000)
       val categorySoldValue: Dataset[Row]  = withSoldValue
@@ -22,6 +32,12 @@ import org.apache.spark.sql.functions._
         categorySoldValue
     }
 
+    /**
+     *
+     * @param aliexpressDF cleaned DataFRme
+     * @return datafreme with additional column "auction age in days"
+     */
+
     def daysFromAuctionLaunch(aliexpressDF: Dataset[Row] ): Dataset[Row]  = {
       val withDiffDate = aliexpressDF.select(
         col("lunchTime"),
@@ -31,8 +47,13 @@ import org.apache.spark.sql.functions._
       withDiffDate
     }
 
+    /**
+     *
+     * @param aliexpressDF cleaned DataFrame
+     * @return Dataframe with calculated sold value per day "title","lunchTime","soldValue","datediff","valuePerDay"
+     */
 
-    def soldValuePerDay(aliexpressDF: DataFrame): DataFrame = {
+    def soldValuePerDay(aliexpressDF: Dataset[Row]): Dataset[Row] = {
       val withSoldValue = aliexpressDF
       .withColumn("soldValue", col("price") * col("sold"))
       .withColumn("datediff",datediff(current_date(), col("lunchTime")))
